@@ -71,9 +71,9 @@ function editar()
         $nome = readline("Insira seu 'novo' nome:");
         $email = readline("Insira seu novo email:");
         $senha = readline("Insira sua nova senha:");
-        $sql = "UPDATE USUARIOS SET NOME = ? EMAIL = ? SENHA = ? WHERE ID =?";
+        $sql = "UPDATE USUARIOS SET NOME = ?, EMAIL = ?, SENHA = ? WHERE ID =?";
         $stmt = $conn->prepare($sql);
-        $stmt->execute([$nome,$email,$senha,$id]);
+        $stmt->execute([$nome,$email,password_hash($senha, PASSWORD_BCRYPT),$id]);
 
     } catch (Exception $e) {
         echo $e->getMessage();
